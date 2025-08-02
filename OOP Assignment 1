@@ -1,0 +1,36 @@
+# Base Class
+class Smartphone:
+    def __init__(self, brand, model, storage):
+        self.brand = brand
+        self.model = model
+        self.storage = storage
+        self.__battery_level = 100  # Private attribute
+
+    def call(self, number):
+        print(f"{self.brand} {self.model} is calling {number}...")
+        self.__battery_level -= 5
+
+    def charge(self):
+        print(f"Charging {self.brand} {self.model}...")
+        self.__battery_level = 100
+
+    def get_battery_level(self):
+        return self.__battery_level
+
+# Inherited Class
+class SmartphonePro(Smartphone):
+    def __init__(self, brand, model, storage, camera_quality):
+        super().__init__(brand, model, storage)
+        self.camera_quality = camera_quality
+
+    # Polymorphic method (overriding)
+    def call(self, number):
+        print(f"[Pro Mode] Video calling {number} using {self.camera_quality} camera!")
+
+# Usage
+phone1 = Smartphone("Samsung", "Galaxy A21", "64GB")
+phone1.call("0912345678")
+print("Battery level:", phone1.get_battery_level())
+
+pro_phone = SmartphonePro("iPhone", "14 Pro", "128GB", "4K Ultra HD")
+pro_phone.call("0987654321")
